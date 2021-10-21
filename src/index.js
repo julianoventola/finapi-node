@@ -111,4 +111,9 @@ app.delete("/account", verifyIfExistsAccountByCPF, (request, response) => {
   return response.status(204).send() // .json(customers)
 })
 
+app.get("/balance", verifyIfExistsAccountByCPF, (request, response) => {
+  const { customer } = request
+  return response.json({ balance: getBalance(customer["statements"]) })
+})
+
 app.listen(3333)
